@@ -1,6 +1,8 @@
 package crawler.test.httpclient;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
@@ -9,40 +11,34 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 
-public class test3
+public class test2
 {
 
 	public static void main(String[] args)
 	{
-		CloseableHttpClient httpclient = HttpClients.createDefault();
+		CloseableHttpClient httpclient = null;
+		CloseableHttpResponse response = null;
+		FileOutputStream out = null;
+		int byteRead = 0;
+		
 		try
 		{
+			httpclient = HttpClients.createDefault();
 			HttpGet httpget = new HttpGet("http://www.zhihu.com/people/be5invis");
-			// 执行get请求.
-			CloseableHttpResponse response = httpclient.execute(httpget);
-			try
+			response = httpclient.execute(httpget);
+			
+			HttpEntity entity = response.getEntity();
+			if (entity != null)
 			{
-				// 获取响应实体
-				HttpEntity entity = response.getEntity();
-				System.out.println("--------------------------------------");
-				// 打印响应状态
-				System.out.println("status" + response.getStatusLine());
-				if (entity != null)
+				InputStream in = entity.getContent();
+				out = new FileOutputStream("E:\\crawlerworkspace\\test3.html");
+				byte[] buf = new byte[1024];
+
+				while ((byteRead = in.read(buf)) != -1)
 				{
-					// 打印响应内容长度
-					System.out.println("Response content length: "
-							+ entity.getContentLength());
-					// 打印响应内容
-					System.out.println("Response content: "
-							+ EntityUtils.toString(entity));
+					out.write(buf, 0, byteRead);
 				}
-				System.out.println("------------------------------------");
-			}
-			finally
-			{
-				response.close();
 			}
 		}
 		catch (ClientProtocolException e)
@@ -62,6 +58,8 @@ public class test3
 			// 关闭连接,释放资源
 			try
 			{
+				out.close();
+				response.close();
 				httpclient.close();
 			}
 			catch (IOException e)

@@ -1,87 +1,192 @@
 package crawler.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Person
 {
-	private int id;
 	
-	/**
-	 * 名字
-	 */
-	private String name;
+	private String name;  //<span class="name">	url截取地址
 	
-	/**
-	 * url
-	 */
+	private String chineseName;		//即显示出来的名字
+	
 	private String url;
 	
-	/**
-	 * 他关注的人总数
-	 */
-	private int followerNum;
+	private String weibo;   //class="zm-profile-header-user-weibo"
 	
-	/**
-	 * 关注他的人的总数
-	 */
-	private int followeeNum;
+	private String jianjie; //<span class="bio" title="炼金术士">
 	
-	/**
-	 * 关注他的人
-	 */
-	private Set<Person> followers = new HashSet<Person>();
+	private String location;	//<span class="location item"
 	
-	private Set<Question> questions;
+	private String business;	//<span class="business item" 
 	
-	private Set<Answer> answers;
+	private String employment;	//<span class="employment item"
 	
-	@Override
-	public boolean equals(Object obj)
+	private String position;	//<span class="position item"
+	
+	private String education;	//<span class="education item"
+	
+	private String educationExtra;	//<span class="education-extra item"
+	
+	private int agreeCounts;	//<span class="zm-profile-header-user-agree">
+	
+	private int thanksCounts;	//<span class="zm-profile-header-user-thanks">
+	
+	private int asksCounts;
+	
+	private int answersCounts;
+	
+	private int postsCounts;
+	
+	private int collectionsCounts;
+	
+	private int logsCounts;
+	
+	private int followeeCounts;
+	
+	public Person(String url)
 	{
-		Person p = (Person)obj;
-		String objName = p.getName();
-		if(objName.equals(this.name))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		this.url = url;
 	}
 	
-
-	public Person(String name)
-	{
-		super();
-		this.name = name;
-	}
-	
-	public Person addFollowers(Person person)
-	{
-		this.followers.add(person);
-		return this;
-	}
-
-	public int getId()
-	{
-		return id;
-	}
-
-	public void setId(int id)
-	{
-		this.id = id;
-	}
-
 	public String getName()
 	{
-		return name;
+		return url.substring(url.lastIndexOf('/')+1, url.length());
+	}
+	public String getWeibo()
+	{
+		return weibo;
+	}
+	public void setWeibo(String weibo)
+	{
+		this.weibo = weibo;
+	}
+	public String getJianjie()
+	{
+		return jianjie;
+	}
+	public void setJianjie(String jianjie)
+	{
+		this.jianjie = jianjie;
+	}
+	public String getLocation()
+	{
+		return location;
+	}
+	public void setLocation(String location)
+	{
+		this.location = location;
+	}
+	public String getBusiness()
+	{
+		return business;
+	}
+	public void setBusiness(String business)
+	{
+		this.business = business;
+	}
+	public String getEmployment()
+	{
+		return employment;
+	}
+	public void setEmployment(String employment)
+	{
+		this.employment = employment;
+	}
+	public String getPosition()
+	{
+		return position;
+	}
+	public void setPosition(String position)
+	{
+		this.position = position;
+	}
+	public String getEducation()
+	{
+		return education;
+	}
+	public void setEducation(String education)
+	{
+		this.education = education;
+	}
+	public String getEducationExtra()
+	{
+		return educationExtra;
+	}
+	public void setEducationExtra(String educationExtra)
+	{
+		this.educationExtra = educationExtra;
+	}
+	public int getAgreeCounts()
+	{
+		return agreeCounts;
+	}
+	public void setAgreeCounts(int agreeCounts)
+	{
+		this.agreeCounts = agreeCounts;
+	}
+	public int getThanksCounts()
+	{
+		return thanksCounts;
+	}
+	public void setThanksCounts(int thanksCounts)
+	{
+		this.thanksCounts = thanksCounts;
+	}
+	public int getAsksCounts()
+	{
+		return asksCounts;
+	}
+	public void setAsksCounts(int asksCounts)
+	{
+		this.asksCounts = asksCounts;
+	}
+	public int getAnswersCounts()
+	{
+		return answersCounts;
+	}
+	public void setAnswersCounts(int answersCounts)
+	{
+		this.answersCounts = answersCounts;
+	}
+	public int getPostsCounts()
+	{
+		return postsCounts;
+	}
+	public void setPostsCounts(int postsCounts)
+	{
+		this.postsCounts = postsCounts;
+	}
+	public int getCollectionsCounts()
+	{
+		return collectionsCounts;
+	}
+	public void setCollectionsCounts(int collectionsCounts)
+	{
+		this.collectionsCounts = collectionsCounts;
+	}
+	public int getLogsCounts()
+	{
+		return logsCounts;
+	}
+	public void setLogsCounts(int logsCounts)
+	{
+		this.logsCounts = logsCounts;
+	}
+	public int getFolloweeCounts()
+	{
+		return followeeCounts;
+	}
+	public void setFolloweeCounts(int followeeCounts)
+	{
+		this.followeeCounts = followeeCounts;
 	}
 
-	public void setName(String name)
+	public String getChineseName()
 	{
-		this.name = name;
+		return chineseName;
+	}
+
+	public void setChineseName(String chineseName)
+	{
+		this.chineseName = chineseName;
 	}
 
 	public String getUrl()
@@ -94,59 +199,10 @@ public class Person
 		this.url = url;
 	}
 
-	public int getFollowerNum()
+	public void setName(String name)
 	{
-		return followerNum;
+		this.name = name;
 	}
-
-	public void setFollowerNum(int followerNum)
-	{
-		this.followerNum = followerNum;
-	}
-
-	public int getFolloweeNum()
-	{
-		return followeeNum;
-	}
-
-	public void setFolloweeNum(int followeeNum)
-	{
-		this.followeeNum = followeeNum;
-	}
-
-	public Set<Person> getFollowers()
-	{
-		return followers;
-	}
-
-
-	public void setFollowers(Set<Person> followers)
-	{
-		this.followers = followers;
-	}
-
-
-	public Set<Question> getQuestions()
-	{
-		return questions;
-	}
-
-	public void setQuestions(Set<Question> questions)
-	{
-		this.questions = questions;
-	}
-
-	public Set<Answer> getAnswers()
-	{
-		return answers;
-	}
-
-	public void setAnswers(Set<Answer> answers)
-	{
-		this.answers = answers;
-	}
-	
-	
 	
 
 }

@@ -39,7 +39,8 @@ public class Crawler
 	 */
 	public void crawl(Person person, Set<Person> allPerson, int depth)
 	{
-		Set<Person> followers = person.getFollowers();
+//		Set<Person> followers = person.getFollowers();
+		Set<Person> followers = null;
 		if(null==followers || depth>=CRAWL_MAX_DEPTH)
 		{
 			//如果depth大于或等于最大设定的最大深度（CRAWL_MAX_DEPTH），则将depth减1，并回退
