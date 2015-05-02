@@ -2,6 +2,14 @@ package crawler.domain;
 
 import crawler.config.ConfigManager;
 
+/**
+ * url的抽象。
+ * 其中对应localPath和URI两个概念
+ * URI是URL去掉domain后的值
+ * localPath是对URI处理后的相对路径
+ * @author lizeyu
+ *
+ */
 public class Page
 {
 	private String url;
